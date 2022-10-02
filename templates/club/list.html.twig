@@ -4,7 +4,7 @@
 le nombre de Formation est: {{ tabFormation|length }}
 <br>
 {% if tabFormation is empty %}
-    <h1>Pas de formation</h1>
+    <strong>Pas de formation</strong>
 {% else %}
     <table border="1">
         <tr>
@@ -22,7 +22,9 @@ le nombre de Formation est: {{ tabFormation|length }}
                     <td>{{ f.nb_participants }}</td>
                     <td>
                         {% if f.nb_participants ==0 %}
-                            <a href="{{ path('reservation_form') }}">Participer</a>
+                            <form action="{{ path('detail',{'id':f.ref}) }}">
+                            <button>participer</button>
+                            </form>
                         {% else %}
                             solde out
 

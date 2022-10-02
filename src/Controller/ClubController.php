@@ -40,10 +40,10 @@ class ClubController extends AbstractController
         return $this->render("club/list.html.twig",
             array("x"=>$var1,"y"=>$var2,"tabFormation"=>$formations));
     }
-    #[Route('/participer', name: 'reservation_form')]
-    public function reservation()
+    #[Route('/participer/{id}', name: 'detail')]
+    public function reservation($id)
     {
-        return new Response('new page');
+        return $this->render("club/detail.html.twig",['ref'=>$id]);
     }
 
 }
