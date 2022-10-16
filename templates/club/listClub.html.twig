@@ -1,0 +1,25 @@
+
+<h1>liste des clubs</h1>
+<td><a href="{{ path('app_addClub') }}" >ajouter club</a></td>
+<br>
+<br>
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>Description</th>
+        <th>modifier</th>
+        <th>supprimer</th>
+    </tr>
+    <tr>
+        {% for i in tabclubs %}
+        <td>{{ i.id }}</td>
+        <td>{{ i.name }}</td>
+        <td>{{ i.Description}}</td>
+        <td><a href="{{ path('app_updateClub',{'id':i.id})}}" >modifier</a></td>
+        <td><a href="{{ path('app_deleteClub',{'id':i.id}) }}" >supprimer</a></td>
+
+    </tr>
+    {% endfor %}
+
+</table>

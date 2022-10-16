@@ -1,0 +1,25 @@
+
+<h1>liste des etudiants</h1>
+<td><a href="{{ path('app_addstudent') }}" >ajouter un etudiant</a></td>
+<br>
+<br>
+<table border="1">
+    <tr>
+        <th>nsc</th>
+        <th>classroom</th>
+        <th>email</th>
+        <th>modifier</th>
+        <th>supprimer</th>
+    </tr>
+    <tr>
+        {% for i in tabstudent %}
+        <td>{{ i.nsc}}</td>
+        <td>{{ i.classroom.name }}</td>
+        <td>{{ i.email}}</td>
+        <td><a href="{{ path('app_updatestudent',{'id':i.nsc})}}" >modifier</a></td>
+        <td><a href="{{ path('app_deletestudent',{'id':i.nsc}) }}" >supprimer</a></td>
+
+    </tr>
+    {% endfor %}
+
+</table>
