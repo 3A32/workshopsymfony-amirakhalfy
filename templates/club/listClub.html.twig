@@ -8,6 +8,7 @@
         <th>id</th>
         <th>name</th>
         <th>Description</th>
+        <th>student</th>
         <th>modifier</th>
         <th>supprimer</th>
     </tr>
@@ -16,6 +17,7 @@
         <td>{{ i.id }}</td>
         <td>{{ i.name }}</td>
         <td>{{ i.Description}}</td>
+        <td>{{ i.student.nsc}}</td>
         <td><a href="{{ path('app_updateClub',{'id':i.id})}}" >modifier</a></td>
         <td><a href="{{ path('app_deleteClub',{'id':i.id}) }}" >supprimer</a></td>
 

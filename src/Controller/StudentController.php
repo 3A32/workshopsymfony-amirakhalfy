@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Student;
+use App\Form\SearchstudentType;
 use App\Form\StudentType;
 use App\Repository\StudentRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -63,4 +64,27 @@ class StudentController extends AbstractController
         $em->flush();
         return $this->redirectToRoute("app_Liststudent");
     }
+    #[Route('/liist', name: 'liistapp')]
+    public function liist(StudentRepository $repository,Request $request){
+
+        $students= $repository->findAll();
+        $studentsByNce=$repository->getStudentsOrdredByNCE();
+        $formSearch= $this->createForm(SearchstudentType::class);
+        $formSearch->handleRequest($request) ;
+        $topStudents= $repository->topStudent();
+        if($formSearch->isSubmitted()){
+            $nsc=$formSearch->getData();
+            $result= $repository->findStudentByNCE($nsc);
+            return $this->renderForm("student/liist.html.twig",
+                array("students"=>$result,"byNCE"=>$studentsByNce,"searchForm"=>$formSearch,"topStudents"=>$topStudents));
+        }
+        return $this->renderForm("student/liist.html.twig",
+            array("students"=>$students,
+                "byNCE"=>$studentsByNce,
+                "searchForm"=>$formSearch,
+                "topStudents"=>$topStudents ));
+
+    }
+
+
 }

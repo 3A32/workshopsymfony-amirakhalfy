@@ -22,7 +22,42 @@ class Student
     #[ORM\JoinColumn(nullable: false)]
     private ?Classroom $classroom = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
 
+    /**
+     * @return string|null
+     */
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param string|null $username
+     */
+    public function setUsername(?string $username): void
+    {
+        $this->username = $username;
+    }
+    #[ORM\Column]
+    private ?float $moyenne = null;
+
+    /**
+     * @return float|null
+     */
+    public function getMoyenne(): ?float
+    {
+        return $this->moyenne;
+    }
+
+    /**
+     * @param float|null $moyenne
+     */
+    public function setMoyenne(?float $moyenne): void
+    {
+        $this->moyenne = $moyenne;
+    }
 
     public function getNsc(): ?string
     {
@@ -61,6 +96,6 @@ class Student
     }
 
 
-}
 
+}
 

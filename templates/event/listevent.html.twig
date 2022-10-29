@@ -1,0 +1,21 @@
+<h1>liste des classroom</h1>
+<td><a href="{{ path('app_addevent') }}" >ajouter classroom</a></td>
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+    </tr>
+    <tr>
+        {% for i in tabevents %}
+        <td>{{ i.id }}</td>
+        <td>{{ i.title|upper}}</td>
+        <td>{{ i.dateDebut}}</td>
+        <td>{{ i.dateFin}}</td>
+        <td>{{ i.categorie.id}}</td>
+        <td><a href="{{ path('app_updatevent',{'id':i.id})}}" >modifier</a></td>
+
+
+    </tr>
+    {% endfor %}
+
+</table>

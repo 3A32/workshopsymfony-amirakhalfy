@@ -1,0 +1,21 @@
+
+<h1>liste des categories</h1>
+<td><a href="{{ path('app_addCategorie') }}" >ajouter categorie</a></td>
+<br>
+<br>
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+
+    </tr>
+    <tr>
+        {% for i in tabcategorie %}
+        <td>{{ i.id }}</td>
+        <td>{{ i.name }}</td>
+
+
+    </tr>
+    {% endfor %}
+
+</table>

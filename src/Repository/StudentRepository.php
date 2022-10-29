@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Student;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Mapping\OrderBy;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -30,6 +31,7 @@ class StudentRepository extends ServiceEntityRepository
         }
     }
 
+
     public function remove(Student $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -38,6 +40,36 @@ class StudentRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function getStudentsOrdredByNce(){
+     $qb=$this->createQueryBuilder('s')
+     ->orderBy('s.nsc','DESC');
+     return $qb->getQuery()
+         ->getResult();
+
+    }
+    public function findStudentByNCE($nsc) {
+        $qb=  $this->createQueryBuilder('s')
+            ->where('s.nsc LIKE :nsc')
+            ->setParameter('nsc',$nsc);
+        return $qb->getQuery()
+            ->getResult();
+
+    }
+    public function searchByMoyenne($min,$max) :array {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT s FROM App\Entity\Student s WHERE s.moyenne BETWEEN :min AND :max')
+            ->setParameter('min',$min)
+            ->setParameter('max',$max);
+        return $query->getResult();
+    }
+
+    public function topStudent(){
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager
+            ->createQuery("SELECT s FROM APP\Entity\Student s WHERE s.moyenne >= 15");
+        return $query->getResult();
+    }
+
 
 //    /**
 //     * @return Student[] Returns an array of Student objects
